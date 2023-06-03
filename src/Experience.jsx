@@ -2,6 +2,7 @@ import { Environment, OrbitControls, useHelper } from "@react-three/drei"
 import { useRef } from "react"
 import { DirectionalLightHelper } from "three"
 import { useControls, folder } from "leva"
+import { Perf } from "r3f-perf"
 
 
 export default function Experience()
@@ -15,7 +16,8 @@ export default function Experience()
         () =>({
             transform: folder({
                 dlPosition: {
-                    value: [2,2,-1.5],
+                    // value: [-2.5, 4, -1.5],
+                    value: [2.5, 9, 1.5],
                     min: -10,
                     max: 10,
                     step: 0.1
@@ -26,6 +28,7 @@ export default function Experience()
 
     return <>
 
+        <Perf position="top-left"/>
         <OrbitControls/>
         <Environment preset="warehouse"/>
 
@@ -36,17 +39,18 @@ export default function Experience()
         {/* 
         //- Platform 
         */}
-        <mesh position-y={1} castShadow>
-            <boxGeometry args={[1,1, 1]}/>
-            <meshStandardMaterial color={"#93BBBD"}/>
+        <mesh position-y={0.27} castShadow>
+            <boxGeometry args={[2, 0.5, 4]}/>
+            <meshStandardMaterial color={"#679EBC"}/>
         </mesh>
 
         {/* 
         //- Floor 
         */}
         <mesh rotation-x={-Math.PI / 2} receiveShadow>
-            <planeGeometry args={[10,10]}/>
-            <meshStandardMaterial color={"#93BBBD"}/>
+            <planeGeometry args={[100,100]}/>
+            {/* <meshStandardMaterial color={"#93BBBD"}/> */}
+            <meshStandardMaterial color={"#679EBC"}/>
         </mesh>
 
     </>
