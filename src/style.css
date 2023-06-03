@@ -9,3 +9,7 @@ body,
     height: 100%;
     background: ivory;
 }
+
+canvas{
+    background-color: #9AC4D7;
+}

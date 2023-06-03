@@ -4,6 +4,7 @@ import { DirectionalLightHelper } from "three"
 import { useControls, folder } from "leva"
 import { Perf } from "r3f-perf"
 
+import Dumbbell from "./components/Dumbbell"
 
 export default function Experience()
 {
@@ -30,16 +31,27 @@ export default function Experience()
 
         <Perf position="top-left"/>
         <OrbitControls/>
-        <Environment preset="warehouse"/>
+        <Environment preset="park"/>
 
         <directionalLight ref={directionalLight} position={dlPosition} castShadow/>
 
         <axesHelper scale={5} position-y={0.5}/>
 
         {/* 
+        //- Dumbbell 
+        */}
+
+        <Dumbbell 
+            position={[0,2,0]}
+            scale={0.4}
+            rotation-y={-Math.PI / 2}
+        />
+
+
+        {/* 
         //- Platform 
         */}
-        <mesh position-y={0.27} castShadow>
+        <mesh position-y={0.27} castShadow receiveShadow>
             <boxGeometry args={[2, 0.5, 4]}/>
             <meshStandardMaterial color={"#679EBC"}/>
         </mesh>
