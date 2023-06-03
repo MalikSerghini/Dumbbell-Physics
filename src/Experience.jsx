@@ -1,6 +1,7 @@
 import { Environment, OrbitControls, useHelper } from "@react-three/drei"
 import { useRef } from "react"
 import { DirectionalLightHelper } from "three"
+import { useControls, folder } from "leva"
 
 
 export default function Experience()
@@ -9,14 +10,28 @@ export default function Experience()
 
     useHelper(directionalLight, DirectionalLightHelper,1,  "crimson")
 
+    const [{dlPosition}] = useControls(
+        "Directional Light",
+        () =>({
+            transform: folder({
+                dlPosition: {
+                    value: [2,2,-1.5],
+                    min: -10,
+                    max: 10,
+                    step: 0.1
+                }
+            })
+        })
+    )
+
     return <>
 
         <OrbitControls/>
         <Environment preset="warehouse"/>
 
-        <directionalLight ref={directionalLight}/>
+        <directionalLight ref={directionalLight} position={dlPosition} castShadow/>
 
-        <axesHelper scale={5}/>
+        <axesHelper scale={5} position-y={0.5}/>
 
         {/* 
         //- Platform 
