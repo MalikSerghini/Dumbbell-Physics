@@ -7,18 +7,25 @@ import { CuboidCollider, Debug, Physics, RigidBody } from "@react-three/rapier"
 
 import Dumbbell from "./components/Dumbbell"
 import Bottle from "./components/Bottle"
+import WeightPlate from "./components/WeightPlate"
 
 export default function Experience()
 {
     const directionalLight = useRef()
+
     const dumbBellRef = useRef()
+    const weightplateTopRef = useRef()
+    const weightplateBottomRef = useRef()
+
+    const bottleRef = useRef()
 
     useHelper(directionalLight, DirectionalLightHelper,1,  "crimson")
 
-    const cubeJump = () =>{
+    const cubeJump = (object, force) =>{
 
         // https://rapier.rs/javascript3d/classes/RigidBody.html
-        dumbBellRef.current.applyImpulse({x: 0, y: 5, z: 0})
+        // object.current.applyImpulse({x: 0, y: 5, z: 0})
+        object.current.applyImpulse({x: 0, y: force, z: 0})
 
         // dumbBellRef.current.applyTorqueImpulse({
         //     x: Math.random() - 0.5,
@@ -40,7 +47,7 @@ export default function Experience()
                     step: 0.1
                 }
             })
-        })
+        }),
     )
 
     return <>
@@ -66,9 +73,9 @@ export default function Experience()
                      restitution={0.5} //Bounciness
                      friction={0.7}
                      colliders={"hull"}
-                     position={[-0.5,2,0]}
+                     position={[-0.8,2,0]}
                      ref={dumbBellRef}
-                     onClick={cubeJump}
+                     onClick={() => cubeJump(dumbBellRef, 3)}
                 >
 
                     <Dumbbell                        
@@ -84,13 +91,53 @@ export default function Experience()
             <Suspense>
                 <RigidBody 
                      gravityScale={1} 
-                     restitution={0.5} //Bounciness
+                     restitution={0.7} //Bounciness
                      friction={0.7}
                      colliders={"hull"}
                      position={[0.7,1,0.8]}
+                     ref={bottleRef}
+                     onClick={() => cubeJump(bottleRef, 0.08)}
                 >
 
                     <Bottle scale={0.5}/>
+                </RigidBody>  
+            </Suspense>
+
+            {/* 
+            //- Weight Plate Bottom 
+            */}
+            <Suspense>
+                <RigidBody 
+                     gravityScale={1} 
+                     restitution={0.7} //Bounciness
+                     friction={0.7}
+                     colliders={"cuboid"}
+                     position={[1.5, 1, -0.7]}
+                     rotation-y={-Math.PI}
+                     ref={weightplateBottomRef}
+                     onClick={() => cubeJump(weightplateBottomRef, 0.3)}
+                >
+
+                    <WeightPlate scale={0.5}/>
+                </RigidBody>  
+            </Suspense>
+
+                       {/* 
+            //- Weight Plate Top 
+            */}
+            <Suspense>
+                <RigidBody 
+                     gravityScale={1} 
+                     restitution={0.7} //Bounciness
+                     friction={0.7}
+                     colliders={"cuboid"}
+                     position={[1, 2, -0.7]}
+                     rotation-y={-Math.PI}
+                     ref={weightplateTopRef}
+                     onClick={() => cubeJump(weightplateTopRef, 0.3)}
+                >
+
+                    <WeightPlate scale={0.5}/>
                 </RigidBody>  
             </Suspense>
           
