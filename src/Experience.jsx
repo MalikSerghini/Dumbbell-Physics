@@ -1,16 +1,31 @@
 import { Environment, OrbitControls, useHelper } from "@react-three/drei"
-import { useRef } from "react"
+import { Suspense, useRef } from "react"
 import { DirectionalLightHelper } from "three"
 import { useControls, folder } from "leva"
 import { Perf } from "r3f-perf"
 
 import Dumbbell from "./components/Dumbbell"
+import { CuboidCollider, Debug, Physics, RigidBody } from "@react-three/rapier"
 
 export default function Experience()
 {
     const directionalLight = useRef()
+    const dumbBellRef = useRef()
 
     useHelper(directionalLight, DirectionalLightHelper,1,  "crimson")
+
+    const cubeJump = () =>{
+
+        // https://rapier.rs/javascript3d/classes/RigidBody.html
+        dumbBellRef.current.applyImpulse({x: 0, y: 5, z: 0})
+
+        // dumbBellRef.current.applyTorqueImpulse({
+        //     x: Math.random() - 0.5,
+        //     y: Math.random() - 0.5,
+        //     z: Math.random() - 0.5,
+        // })
+    }
+
 
     const [{dlPosition}] = useControls(
         "Directional Light",
@@ -37,33 +52,52 @@ export default function Experience()
 
         <axesHelper scale={5} position-y={0.5}/>
 
-        {/* 
-        //- Dumbbell 
-        */}
+        <Physics gravity={[0, -9.81, 0]}>
 
-        <Dumbbell 
-            position={[0,2,0]}
-            scale={0.4}
-            rotation-y={-Math.PI / 2}
-        />
+            {/* <Debug/> */}
 
+            {/* 
+            //- Dumbbell 
+            */}
 
-        {/* 
-        //- Platform 
-        */}
-        <mesh position-y={0.27} castShadow receiveShadow>
-            <boxGeometry args={[2, 0.5, 4]}/>
-            <meshStandardMaterial color={"#679EBC"}/>
-        </mesh>
+            <Suspense>
+                <RigidBody 
+                     gravityScale={1} 
+                     restitution={1.2} //Bounciness
+                     friction={0.7}
+                     colliders={"cuboid"}
+                     position={[0,2,0]}
+                     ref={dumbBellRef}
+                     onClick={cubeJump}
+                >
 
-        {/* 
-        //- Floor 
-        */}
-        <mesh rotation-x={-Math.PI / 2} receiveShadow>
-            <planeGeometry args={[100,100]}/>
-            {/* <meshStandardMaterial color={"#93BBBD"}/> */}
-            <meshStandardMaterial color={"#679EBC"}/>
-        </mesh>
+                    <Dumbbell                        
+                        scale={0.4}
+                        rotation-y={-Math.PI / 2}
+                    />
+                </RigidBody>  
+            </Suspense>
+          
+
+            {/* 
+            //- Floor 
+            */}
+            <RigidBody type="fixed">
+
+                <mesh position-y={0.27} castShadow receiveShadow>
+                    <boxGeometry args={[2, 0.5, 4]}/>
+                    <meshStandardMaterial color={"#679EBC"}/>
+                </mesh>
+
+                <mesh rotation-x={-Math.PI / 2} receiveShadow>
+                    <planeGeometry args={[100,100]}/>
+                    {/* <meshStandardMaterial color={"#93BBBD"}/> */}
+                    <meshStandardMaterial color={"#679EBC"}/>
+                </mesh>
+
+            </RigidBody>
+
+        </Physics>
 
     </>
 }
