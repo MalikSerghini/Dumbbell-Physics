@@ -55,7 +55,7 @@ export default function Experience()
 
         <Physics gravity={[0, -9.81, 0]}>
 
-            <Debug/>
+            {/* <Debug/> */}
 
             {/* 
             //- Dumbbell 
@@ -63,10 +63,10 @@ export default function Experience()
             <Suspense>
                 <RigidBody 
                      gravityScale={1} 
-                     restitution={1.2} //Bounciness
+                     restitution={0.5} //Bounciness
                      friction={0.7}
-                     colliders={"cuboid"}
-                     position={[0,2,0]}
+                     colliders={"hull"}
+                     position={[-0.5,2,0]}
                      ref={dumbBellRef}
                      onClick={cubeJump}
                 >
