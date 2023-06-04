@@ -1,4 +1,4 @@
-import { Environment, OrbitControls, useHelper } from "@react-three/drei"
+import { Center, Environment, OrbitControls, Text3D, useHelper } from "@react-three/drei"
 import { Suspense, useRef } from "react"
 import { DirectionalLightHelper } from "three"
 import { useControls, folder } from "leva"
@@ -62,7 +62,7 @@ export default function Experience()
 
         <Physics gravity={[0, -9.81, 0]}>
 
-            {/* <Debug/> */}
+            <Debug/>
 
             {/* 
             //- Dumbbell 
@@ -140,6 +140,30 @@ export default function Experience()
                     <WeightPlate scale={0.5}/>
                 </RigidBody>  
             </Suspense>
+
+            {/* 
+            //- Text 
+            */}
+            <RigidBody type="fixed" position={[-1.5,1,0]} rotation-y={Math.PI / 2}>
+                <Center>
+                    <Text3D
+                        // material={material}
+                        font={"./fonts/helvetiker_regular.typeface.json"}
+                        size={0.75}
+                        height={0.2}
+                        curveSegments={12}
+                        bevelEnabled
+                        bevelThickness={0.1}
+                        bevelSize={0.02}
+                        bevelOffset={0}
+                        bevelSegments={5}
+                    >
+                        {`Click The\n Objects`}
+                    </Text3D>
+                </Center>
+    	        
+
+            </RigidBody>
           
 
             {/* 
