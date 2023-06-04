@@ -3,9 +3,10 @@ import { Suspense, useRef } from "react"
 import { DirectionalLightHelper } from "three"
 import { useControls, folder } from "leva"
 import { Perf } from "r3f-perf"
+import { CuboidCollider, Debug, Physics, RigidBody } from "@react-three/rapier"
 
 import Dumbbell from "./components/Dumbbell"
-import { CuboidCollider, Debug, Physics, RigidBody } from "@react-three/rapier"
+import Bottle from "./components/Bottle"
 
 export default function Experience()
 {
@@ -54,12 +55,11 @@ export default function Experience()
 
         <Physics gravity={[0, -9.81, 0]}>
 
-            {/* <Debug/> */}
+            <Debug/>
 
             {/* 
             //- Dumbbell 
             */}
-
             <Suspense>
                 <RigidBody 
                      gravityScale={1} 
@@ -75,6 +75,22 @@ export default function Experience()
                         scale={0.4}
                         rotation-y={-Math.PI / 2}
                     />
+                </RigidBody>  
+            </Suspense>
+
+            {/* 
+            //- Bottle 
+            */}
+            <Suspense>
+                <RigidBody 
+                     gravityScale={1} 
+                     restitution={0.5} //Bounciness
+                     friction={0.7}
+                     colliders={"hull"}
+                     position={[0.7,1,0.8]}
+                >
+
+                    <Bottle scale={0.5}/>
                 </RigidBody>  
             </Suspense>
           
