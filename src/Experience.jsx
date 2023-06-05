@@ -150,7 +150,7 @@ export default function Experience()
             {/* 
             //- InfoText 
             */}
-            <RigidBody position={[1,1.2,-7]} rotation-y={Math.PI * 0.1}>
+            <RigidBody ref={infoTextRef} position={[1,1.2,-7]} rotation-y={Math.PI * 0.1} onClick={() => cubeJump(infoTextRef, 30)} restitution={0.7}>
                 
                 <InfoText value={`click to\ninteract`}/>
 
