@@ -55,7 +55,11 @@ export default function Experience()
     return <>
 
         <Perf position="top-left"/>
-        <OrbitControls/>
+        <OrbitControls 
+            maxDistance={20}
+            minDistance={3}
+            maxPolarAngle={1.5}
+        />
         <Environment preset="park"/>
 
         <directionalLight ref={directionalLight} position={dlPosition} castShadow/>
@@ -148,7 +152,7 @@ export default function Experience()
             */}
             <RigidBody position={[1,1.2,-7]} rotation-y={Math.PI * 0.1}>
                 
-                <InfoText value={`Click\nTo Move`}/>
+                <InfoText value={`click to\ninteract`}/>
 
             </RigidBody>
           
