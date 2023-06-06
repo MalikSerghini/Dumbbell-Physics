@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body,
 #root
@@ -8,8 +12,4 @@ body,
     width: 100%;
     height: 100%;
     background: ivory;
-}
-
-canvas{
-    background-color: #9AC4D7;
 }

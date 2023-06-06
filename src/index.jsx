@@ -16,6 +16,7 @@ root.render(
             position: [ 4, 2, 6 ]
             // position: [ 9, 3, 6 ]
         } }
+        className='bg-[#9AC4D7]'
     >
         <Experience />
     </Canvas>
