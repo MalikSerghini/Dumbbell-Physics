@@ -19,7 +19,7 @@ npm run dev
 
 ## Example
 
-![Alt Text](/public/readme/project.png)
+![Alt Text](/public/readme/preview.gif)
 
 ---
 
