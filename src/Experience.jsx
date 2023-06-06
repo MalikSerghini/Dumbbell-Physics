@@ -21,7 +21,7 @@ export default function Experience()
 
     const bottleRef = useRef()
 
-    useHelper(directionalLight, DirectionalLightHelper,1,  "crimson")
+    // useHelper(directionalLight, DirectionalLightHelper,1,  "crimson")
 
     const cubeJump = (object, force) =>{
 
@@ -37,24 +37,24 @@ export default function Experience()
     }
 
 
-    const [{dlPosition}] = useControls(
-        "Directional Light",
-        () =>({
-            transform: folder({
-                dlPosition: {
-                    // value: [-2.5, 4, -1.5],
-                    value: [2.5, 9, 1.5],
-                    min: -10,
-                    max: 10,
-                    step: 0.1
-                }
-            })
-        }),
-    )
+    // const [{dlPosition}] = useControls(
+    //     "Directional Light",
+    //     () =>({
+    //         transform: folder({
+    //             dlPosition: {
+    //                 // value: [-2.5, 4, -1.5],
+    //                 value: [2.5, 9, 1.5],
+    //                 min: -10,
+    //                 max: 10,
+    //                 step: 0.1
+    //             }
+    //         })
+    //     }),
+    // )
 
     return <>
 
-        <Perf position="top-left"/>
+        {/* <Perf position="top-left"/> */}
         <OrbitControls 
             maxDistance={20}
             minDistance={3}
@@ -62,9 +62,10 @@ export default function Experience()
         />
         <Environment preset="park"/>
 
-        <directionalLight ref={directionalLight} position={dlPosition} castShadow/>
+        {/* <directionalLight ref={directionalLight} position={dlPosition} castShadow/> */}
+        <directionalLight ref={directionalLight} position={[2.5, 9, 1.5]} castShadow/>
 
-        <axesHelper scale={5} position-y={0.5}/>
+        {/* <axesHelper scale={5} position-y={0.5}/> */}
 
         <Physics gravity={[0, -9.81, 0]}>
 
