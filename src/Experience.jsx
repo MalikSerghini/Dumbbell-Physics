@@ -24,16 +24,7 @@ export default function Experience()
     // useHelper(directionalLight, DirectionalLightHelper,1,  "crimson")
 
     const cubeJump = (object, force) =>{
-
-        // https://rapier.rs/javascript3d/classes/RigidBody.html
-        // object.current.applyImpulse({x: 0, y: 5, z: 0})
         object.current.applyImpulse({x: 0, y: force, z: 0})
-
-        // dumbBellRef.current.applyTorqueImpulse({
-        //     x: Math.random() - 0.5,
-        //     y: Math.random() - 0.5,
-        //     z: Math.random() - 0.5,
-        // })
     }
 
 
