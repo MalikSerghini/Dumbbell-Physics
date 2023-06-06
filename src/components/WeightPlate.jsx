@@ -1,6 +1,6 @@
 import { Clone, useGLTF } from '@react-three/drei'
 
-export default function Dumbbell(props){
+export default function WeightPlate(props){
 
     const model = useGLTF("./models/weightPlate.gltf")
 
